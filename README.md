@@ -21,7 +21,7 @@ Or install it yourself as:
 
 ## Usage
 
-To use with Rails 3, the server expects a $distributed_redis global variable to be set.
+To use with Rails, the server expects a $distributed_redis global variable to be set.
 Here is an example of setting up multiple instances with different ports:
 
 Create an initializer in /initializers/distributed_redis.rb
