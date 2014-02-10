@@ -1,14 +1,46 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RedisNodeView</title>
-  <%= stylesheet_link_tag    "redis_node_view/application", media: "all" %>
-  <%= javascript_include_tag "redis_node_view/application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Distributed Redis</title>
+    <%= stylesheet_link_tag "redis_node_view/application", :media => "all" %>
+    <script>
+      $(function () {
+        $("[rel='tooltip']").tooltip();
+      });
+    </script>
+  </head>
+  <body style="padding-top: 50px;">
 
-<%= yield %>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
 
-</body>
+            <a class="brand" href="/">
+              Distributed Redis
+            </a>
+
+            <ul class="nav">
+              <li><a id="key-search" href="nodes/search" rel="tooltip" title="Find node and storage info on a key" data-placement="bottom">Key Search</a></li>
+            </ul>
+
+            <ul class="nav pull-right">
+            </ul>
+
+
+        </div>
+      </div>
+    </div>
+
+
+  <div class="container">
+    <%if @error then %>
+      <div class="alert alert-error"><%=@error%></div>
+    <% end %>
+      <%= yield %>
+  </div>
+    <!-- Javascripts
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= javascript_include_tag "redis_node_view/application" %>
+  </body>
 </html>
