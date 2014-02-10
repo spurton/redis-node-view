@@ -12,7 +12,15 @@ gemspec
 
 # To use debugger
 # gem 'debugger'
+gem 'settingslogic'
+gem 'redis'
+gem 'hiredis'
+gem 'will_paginate'
+gem 'coffee-rails'
 
 group :assets do
+  gem 'jquery-rails'
+  gem 'therubyracer', :platforms => :ruby
   gem 'twitter-bootstrap-rails'
 end
+
