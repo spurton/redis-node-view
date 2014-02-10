@@ -1,0 +1,49 @@
+<h3>Look up a key</h3>
+<p>This will display node information based on a key</p>
+<form action='/find_key' method='get' class="form-inline well">
+  <input name='key' placeholder="key" autofocus value="<%= params[:key] %>">
+  <input class="btn primary" type='submit' value='Search'>
+</form>
+
+<% if params[:key] && !key_found? %>
+  <div class="alert"><h4>Key Not found</h4></div>
+<% end %>
+
+<% if key_found? %>
+  <h4>Exists on node:</h4>
+  <p><a href="/node/<%= Digest::SHA1.hexdigest(@node.id) %>"><%= @node.id %></a></p>
+
+  <h4>Storage info:</h4>
+  <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for item in %w( refcount encoding idletime ) %>
+    <tr >
+        <td><strong><%= item %>:</strong></td>
+        <td>
+          <%= @node.object(item, params[:key]) %>
+        </td>
+    </tr>
+    <% end %>
+    <tr>
+      <td><strong>size:</strong></td>
+      <td><%= @node.debug('OBJECT', params[:key]).match(/serializedlength:(\d*)/)[1] %> bytes</td>
+    </tr>
+    <tr>
+      <td><strong>type:</strong></td>
+      <td><%= @node.type(params[:key]) %></td>
+    </tr>
+    <% if @node.ttl(params[:key]) > -1 %>
+    <tr>
+      <td><strong>TTL:</strong></td>
+      <td><%= @node.ttl(params[:key]) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+  </table>
+<% end %>

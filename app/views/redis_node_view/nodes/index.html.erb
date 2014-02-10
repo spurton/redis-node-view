@@ -1,0 +1,7 @@
+<h3>Node List</h3>
+<% for node in @nodes %>
+  <a href="/node/<%= Digest::SHA1.hexdigest(node.id) %>"><%= node.id %></a>
+<% end %>
+
+
+<%= will_paginate @nodes %>
