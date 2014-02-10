@@ -1,0 +1,15 @@
+defaults: &defaults
+  host: localhost
+  ports: !ruby/range 6400..6527
+
+development:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
